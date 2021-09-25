@@ -1,5 +1,5 @@
 {
-  "name": "home-assistant-rxjs",
+  "name": "@heathbar/home-assistant-rxjs",
   "version": "1.0.0",
   "description": "RxJs wrapper for home assistant state changes",
   "main": "lib/index.js",

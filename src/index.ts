@@ -1,5 +1,5 @@
 import { BehaviorSubject, Observable } from 'rxjs';
-import { getAuth, createConnection, subscribeEntities, HassEntity, AuthData, Connection, subscribeConfig, HassConfig, HassEntities, subscribeServices, HassServices } from 'home-assistant-js-websocket';
+import { getAuth, createConnection, subscribeEntities, HassEntity, AuthData, Connection, subscribeConfig, HassConfig, HassEntities, subscribeServices, HassServices, callService } from 'home-assistant-js-websocket';
 import { distinctUntilKeyChanged, filter, pluck } from 'rxjs/operators';
 
 const DEFAULT_OPTIONS = {
@@ -43,6 +43,10 @@ export class HomeAssistant {
     subscribeConfig(this.connection, config => this.config$.next(config));
     subscribeEntities(this.connection, entities => this.entities$.next(entities));
     subscribeServices(this.connection, services => this.services$.next(services));
+  }
+
+  callService(domain: string, service: string, data: any) {
+    return callService(this.connection as Connection, domain, service, data);
   }
 
   private saveTokens(tokens: AuthData | null) {

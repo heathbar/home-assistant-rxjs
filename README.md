@@ -3,7 +3,7 @@ A simple service that exposes Home Assistant events as an RxJs stream (with Type
 
 ## Usage
 
-### Subscribe to all entities
+### Subscribe to all changes of all entities
 
 ```TypeScript
 const hass = new HomeAssistant('http://192.168.0.101:8123');
@@ -13,9 +13,18 @@ hass.config$.subscribe(entities => console.log(entities));
 hass.services$.subscribe(entities => console.log(entities));
 ```
 
-The library also includes the following operators
+### callService
 
-###  selectEntity
+Call any Home Assistant service
+
+```TypeScript
+await hass.callService('light', 'turn_on', { entity_id: 'light.my_light', brightness_pct: 50, color_name: 'blue' });
+
+await hass.callService('media_player', 'media_play_pause', { entity_id: 'media_player.my_music_player'});
+
+await hass.callService('script', 'party_time');
+```
+### selectEntity
 
 Filters out all events except for the specified entity
 
@@ -42,7 +51,7 @@ hass.entities$.pipe(
 
 ```
 
-###  selectEntityState
+### selectEntityState
 
 Filters out all events except for the specified entity and emit only the current state of the given entity
 
@@ -56,7 +65,7 @@ hass.entities$.pipe(
 '47.4'
 ```
 
-### Additional Information
+## Additional Information
 
 This library was designed with the browser in mind, although it would not be much work to make it work in node. 
 

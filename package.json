@@ -2,7 +2,7 @@
   "name": "home-assistant-rxjs",
   "version": "1.0.0",
   "description": "RxJs wrapper for home assistant state changes",
-  "main": "index.js",
+  "main": "lib/index.js",
   "scripts": {
     "prepare": "npm run build",
     "build": "tsc",
